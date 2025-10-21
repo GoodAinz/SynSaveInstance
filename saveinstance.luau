@@ -2011,6 +2011,8 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 			return string.sub(string.gsub(string.gsub(string.gsub(str, "[^%w _]", ""), " +", " "), " +$", ""), 1, 240)
 		end
 
+		local timestamp = os.date("_%Y-%m-%d_%H-%M-%S")  -- Appends _YYYY-MM-DD_HH-MM-SS to the filename
+
 		if ToSaveInstance then
 			if mode == "optimized" then -- ! NOT supported with Model file mode
 				mode = "full"
@@ -2037,7 +2039,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 				or sanitizeFileName("model " .. PlaceName .. " " .. (ToSaveInstance or tmp[1] or game):GetFullName())
 			) .. ".rbxmx"
 		else
-			placename = (FilePath or sanitizeFileName("place " .. PlaceName)) .. ".rbxlx"
+			placename = (FilePath or sanitizeFileName("place " .. PlaceName)) .. timestamp .. ".rbxlx"
 		end
 
 		if GLOBAL_ENV[placename] then
